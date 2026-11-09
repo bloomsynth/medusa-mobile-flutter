@@ -148,7 +148,7 @@ class OptionSelect extends StatelessWidget {
           children: [
             for (final value in option.values)
               _OptionChip(
-                key: const Key('option-button'),
+                key: ValueKey('option-${option.id}-${value.value}'),
                 label: value.value,
                 selected: value.value == current,
                 colors: colors,
@@ -184,9 +184,8 @@ class _OptionChip extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         onTap: onTap,
         child: Container(
-          constraints: const BoxConstraints(minHeight: 44, minWidth: 64),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-          alignment: Alignment.center,
+          constraints: const BoxConstraints(minWidth: 64),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 11),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
@@ -195,6 +194,7 @@ class _OptionChip extends StatelessWidget {
           ),
           child: Text(
             label,
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
               color: selected ? colors.contentSecondary : colors.content,

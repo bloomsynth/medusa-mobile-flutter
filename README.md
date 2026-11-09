@@ -103,11 +103,19 @@ flutter analyze
 flutter test
 ```
 
+An end-to-end test drives the real app on a device against a development
+backend and places an order with manual payment:
+
+```bash
+flutter test integration_test --dart-define-from-file=.env -d <device-id>
+```
+
 Unit tests run the real client, models and cubits against a fake Store API
 (`test/helpers/fake_medusa.dart`), with Stripe replaced by a fake. They cover
 the API client, cart, checkout guards and payment results, prices, variant
-selection and stock rules. They do not cover screens, native builds, the real
-Payment Sheet or a live backend; check those on a device.
+selection and stock rules. The end-to-end test covers browsing, the cart and manual checkout. Stripe's
+Payment Sheet, accounts, addresses and iOS are not covered by any test; check
+those on a device.
 
 ## Differences from the React Native app
 

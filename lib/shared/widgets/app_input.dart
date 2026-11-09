@@ -14,6 +14,7 @@ class AppInput extends StatelessWidget {
     this.enabled = true,
     this.autofocus = false,
     this.textCapitalization = TextCapitalization.none,
+    this.textInputAction = TextInputAction.next,
     this.onChanged,
     this.initialValue,
     super.key,
@@ -29,6 +30,9 @@ class AppInput extends StatelessWidget {
   final bool enabled;
   final bool autofocus;
   final TextCapitalization textCapitalization;
+
+  /// The keyboard action; defaults to moving on to the next field.
+  final TextInputAction textInputAction;
   final ValueChanged<String>? onChanged;
   final String? initialValue;
 
@@ -59,8 +63,9 @@ class AppInput extends StatelessWidget {
           enabled: enabled,
           autofocus: autofocus,
           textCapitalization: textCapitalization,
+          textInputAction: textInputAction,
           onChanged: onChanged,
-          autovalidateMode: AutovalidateMode.disabled,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           style: TextStyle(fontSize: 16, color: colors.content),
           decoration: InputDecoration(
             hintText: placeholder,
