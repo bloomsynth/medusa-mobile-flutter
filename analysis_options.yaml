@@ -1,0 +1,23 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  errors:
+    lines_longer_than_80_chars: ignore
+    invalid_annotation_target: ignore
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - lib/**/*.g.dart
+    - lib/**/*.freezed.dart
+    - lib/l10n/generated/**
+
+linter:
+  rules:
+    public_member_api_docs: false
+    # Cubits start loading in `create:` callbacks (`Cubit()..load()`), which
+    # is the flutter_bloc idiom; they report failures through their state.
+    discarded_futures: false
+    # Keep `ClassName(...)` constructor declarations: clearer to newcomers
+    # than the short `new(...)` form, and what the code generators expect.
+    unnecessary_type_name_in_constructor: false
