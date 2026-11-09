@@ -5,13 +5,19 @@ Browsing, search, cart, checkout, accounts and themes for iOS and Android,
 ported from
 [medusa-mobile-react-native](https://github.com/bloomsynth/medusa-mobile-react-native).
 
+[Website](https://bloomsynth.com/medusa-mobile/flutter/) ·
+[Tutorial](https://codingislove.com/medusa-mobile-flutter/) ·
+[React Native version](https://github.com/bloomsynth/medusa-mobile-react-native)
+
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Tested with Medusa 2.22.1](https://img.shields.io/badge/Medusa-tested%20with%202.22.1-blue)](https://github.com/medusajs/medusa/releases/tag/v2.22.1)
 
 <img src="https://i.imgur.com/LKvNyGX.png" alt="Medusa Mobile screens" />
 
 Screenshots are from the React Native app; the Flutter port follows the same
-design.
+design. Prefer React Native and TypeScript? Use
+[Medusa Mobile for React Native](https://github.com/bloomsynth/medusa-mobile-react-native),
+which also has a project generator (`npx create-medusa-mobile`).
 
 ## Features
 
