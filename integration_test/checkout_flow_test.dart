@@ -9,50 +9,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:medusa_mobile/catalog/widgets/products_list.dart';
 import 'package:medusa_mobile/checkout/widgets/checkout_steps.dart';
-import 'package:medusa_mobile/main.dart' as app;
-import 'package:medusa_mobile/shared/widgets/widgets.dart';
 
-/// Pumps frames until [finder] matches. `pumpAndSettle` cannot be used: the
-/// banner carousel and progress indicators animate forever.
-Future<void> pumpUntil(
-  WidgetTester tester,
-  Finder finder, {
-  Duration timeout = const Duration(seconds: 30),
-}) async {
-  final end = DateTime.now().add(timeout);
-  while (finder.evaluate().isEmpty) {
-    if (DateTime.now().isAfter(end)) {
-      fail('Timed out waiting for $finder');
-    }
-    await tester.pump(const Duration(milliseconds: 200));
-  }
-}
-
-Future<void> pumpFor(WidgetTester tester, Duration duration) async {
-  final end = DateTime.now().add(duration);
-  while (DateTime.now().isBefore(end)) {
-    await tester.pump(const Duration(milliseconds: 100));
-  }
-}
-
-Future<void> tapVisible(WidgetTester tester, Finder finder) async {
-  await tester.ensureVisible(finder);
-  await tester.pump(const Duration(milliseconds: 300));
-  await tester.tap(finder);
-  await tester.pump(const Duration(milliseconds: 300));
-}
-
-Future<void> fill(WidgetTester tester, String label, String text) async {
-  final field = find.descendant(
-    of: find.widgetWithText(AppInput, label),
-    matching: find.byType(TextFormField),
-  );
-  await tester.ensureVisible(field.first);
-  await tester.enterText(field.first, text);
-  await tester.pump(const Duration(milliseconds: 100));
-}
-
-Finder button(String title) => find.widgetWithText(AppButton, title);
+import 'helpers.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -60,7 +18,7 @@ void main() {
   testWidgets('browse, add to cart and check out with manual payment', (
     tester,
   ) async {
-    app.main();
+    startApp();
 
     // Home: products with region prices.
     await pumpUntil(tester, find.byType(ProductGridItem));
@@ -86,17 +44,7 @@ void main() {
     // Address.
     await pumpUntil(tester, button('Continue to Delivery'));
     await fill(tester, 'Email', 'test.buyer@example.com');
-    await fill(tester, 'First Name', 'Test');
-    await fill(tester, 'Last Name', 'Buyer');
-    await fill(tester, 'Address', '12 Test Street');
-    await fill(tester, 'Postal Code', '560001');
-    await fill(tester, 'City', 'Bengaluru');
-    await fill(tester, 'Phone', '5550100');
-    final country = find.byType(DropdownButtonFormField<String>);
-    await tapVisible(tester, country);
-    await pumpFor(tester, const Duration(seconds: 1));
-    await tester.tap(find.byType(DropdownMenuItem<String>).last);
-    await pumpFor(tester, const Duration(seconds: 1));
+    await fillAddress(tester);
     await tester.tap(button('Continue to Delivery'));
 
     // Delivery: Continue stays off until a method is saved on the cart.

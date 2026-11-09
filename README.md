@@ -1,12 +1,35 @@
 # Medusa Mobile (Flutter)
 
-A Flutter storefront for [Medusa v2](https://medusajs.com), ported from
-[medusa-mobile-react-native](https://github.com/bloomsynth/medusa-mobile-react-native):
-browsing, search, cart, promo codes, checkout (manual and Stripe), accounts,
-orders, addresses, regions, themes and two languages.
+**An open-source Flutter storefront for [Medusa v2](https://medusajs.com).**
+Browsing, search, cart, checkout, accounts and themes for iOS and Android,
+ported from
+[medusa-mobile-react-native](https://github.com/bloomsynth/medusa-mobile-react-native).
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Tested with Medusa 2.22.1](https://img.shields.io/badge/Medusa-tested%20with%202.22.1-blue)](https://github.com/medusajs/medusa/releases/tag/v2.22.1)
+
+## Features
+
+- Product browsing with infinite scroll, categories and collections
+- Product search
+- Product pages with variant selection, stock rules and related products
+- Cart with quantities and promo codes
+- Guest checkout: address, delivery, payment, review
+- Manual payment and Stripe (Payment Sheet)
+- Sign-in, registration, profile, saved addresses and order history
+- Multiple regions with region prices
+- Four built-in themes, each with light and dark mode
+- English and Indonesian
 
 The backend is a separate project. The app talks to its Store API with a
 publishable key; admin credentials and secret keys never belong in the app.
+
+## Status
+
+Checked on Android against the Medusa 2.22.1 starter backend, where the
+checkout, account, address, settings and search flows run as end-to-end tests
+on a device. Not yet checked: a real test payment through the Stripe Payment
+Sheet, and iOS (the project is set up for it but has not been built).
 
 ## Quick start
 
@@ -24,18 +47,18 @@ flutter run --dart-define-from-file=.env
 Values are compiled in with `--dart-define-from-file=.env`; rebuild after
 changing them. `.env` is ignored by Git.
 
-| Variable                 | Purpose                                                 |
-| ------------------------ | ------------------------------------------------------- |
-| `MEDUSA_BACKEND_URL`     | Medusa server base URL reachable from the device        |
-| `PUBLISHABLE_API_KEY`    | Store API key linked to the products' sales channel     |
-| `DEFAULT_LOCALE`         | `en-US` or `id-ID`; a language saved in Settings wins   |
-| `STRIPE_PUBLISHABLE_KEY` | Stripe publishable key; empty leaves card payments off  |
+| Variable                 | Purpose                                                |
+| ------------------------ | ------------------------------------------------------ |
+| `MEDUSA_BACKEND_URL`     | Medusa server base URL reachable from the device       |
+| `PUBLISHABLE_API_KEY`    | Store API key linked to the products' sales channel    |
+| `DEFAULT_LOCALE`         | `en-US` or `id-ID`; a language saved in Settings wins  |
+| `STRIPE_PUBLISHABLE_KEY` | Stripe publishable key; empty leaves card payments off |
 
-| Target                  | Local backend URL                              |
-| ----------------------- | ---------------------------------------------- |
-| Android Studio emulator | `http://10.0.2.2:9000` (template default)      |
-| iOS simulator           | `http://localhost:9000`                        |
-| Physical device         | The host computer's LAN IP, port 9000          |
+| Target                  | Local backend URL                                              |
+| ----------------------- | -------------------------------------------------------------- |
+| Android Studio emulator | `http://10.0.2.2:9000` (template default)                      |
+| iOS simulator           | `http://localhost:9000`                                        |
+| Physical Android device | `http://localhost:9000` after `adb reverse tcp:9000 tcp:9000`, or the host computer's LAN IP |
 
 Plain `http` works in Android debug builds and for local addresses on iOS.
 Release builds need an `https` backend.
@@ -103,19 +126,27 @@ flutter analyze
 flutter test
 ```
 
-An end-to-end test drives the real app on a device against a development
-backend and places an order with manual payment:
-
-```bash
-flutter test integration_test --dart-define-from-file=.env -d <device-id>
-```
-
 Unit tests run the real client, models and cubits against a fake Store API
 (`test/helpers/fake_medusa.dart`), with Stripe replaced by a fake. They cover
 the API client, cart, checkout guards and payment results, prices, variant
-selection and stock rules. The end-to-end test covers browsing, the cart and manual checkout. Stripe's
-Payment Sheet, accounts, addresses and iOS are not covered by any test; check
-those on a device.
+selection and stock rules.
+
+End-to-end tests drive the real app on a device against a real backend:
+
+```bash
+flutter test integration_test/checkout_flow_test.dart --dart-define-from-file=.env -d DEVICE_ID
+flutter test integration_test/account_flow_test.dart --dart-define-from-file=.env -d DEVICE_ID
+```
+
+They place an order with manual payment and register a new customer on every
+run, so point them at a development backend only. They cover browsing, the
+cart, manual checkout, registration and sign-in, profile editing, saved
+addresses, the language setting and search. The Stripe Payment Sheet and iOS
+are not covered by any test; check those on a device.
+
+On Windows, `android/gradle.properties` turns off Kotlin incremental
+compilation: it fails when the project and the pub cache are on different
+drives.
 
 ## Differences from the React Native app
 
@@ -124,3 +155,7 @@ those on a device.
 - Returning to checkout resumes at Payment unless the cart already has a
   pending payment session.
 - Order dates are shown as dates, not relative times.
+
+## License
+
+[MIT](LICENSE)
