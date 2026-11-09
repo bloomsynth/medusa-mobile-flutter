@@ -8,6 +8,11 @@ ported from
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Tested with Medusa 2.22.1](https://img.shields.io/badge/Medusa-tested%20with%202.22.1-blue)](https://github.com/medusajs/medusa/releases/tag/v2.22.1)
 
+<img src="https://i.imgur.com/LKvNyGX.png" alt="Medusa Mobile screens" />
+
+Screenshots are from the React Native app; the Flutter port follows the same
+design.
+
 ## Features
 
 - Product browsing with infinite scroll, categories and collections
@@ -107,6 +112,8 @@ How state flows:
   filters.
 
 ### Customizing
+
+![Multiple themes](https://i.imgur.com/CfogW5z.png)
 
 - **Themes:** edit or add a color set in `lib/theme/app_themes.dart`.
 - **Copy and languages:** edit the ARB files in `lib/l10n/arb/` and run
