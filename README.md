@@ -12,7 +12,7 @@ ported from
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Tested with Medusa 2.22.1](https://img.shields.io/badge/Medusa-tested%20with%202.22.1-blue)](https://github.com/medusajs/medusa/releases/tag/v2.22.1)
 
-<img src="https://i.imgur.com/LKvNyGX.png" alt="Medusa Mobile screens" />
+<img src="https://bloomsynth.com/images/medusa-mobile-flutter-cover.png" alt="Medusa Mobile Flutter" />
 
 Screenshots are from the React Native app; the Flutter port follows the same
 design. Prefer React Native and TypeScript? Use
