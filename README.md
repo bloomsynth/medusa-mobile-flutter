@@ -14,8 +14,11 @@ ported from
 
 <img src="https://bloomsynth.com/images/medusa-mobile-flutter-cover.png" alt="Medusa Mobile Flutter" />
 
-Screenshots are from the React Native app; the Flutter port follows the same
-design. Prefer React Native and TypeScript? Use
+| Home | Product | Category | Cart |
+| :---: | :---: | :---: | :---: |
+| <img src="docs/screenshots/home.png" width="200" alt="Home screen with a banner carousel and top-selling products" /> | <img src="docs/screenshots/product.png" width="200" alt="Product page with its description, price and size picker" /> | <img src="docs/screenshots/category.png" width="200" alt="Shirts category with a grid of products" /> | <img src="docs/screenshots/cart.png" width="200" alt="Cart with one item, quantity controls and the order summary" /> |
+
+Prefer React Native and TypeScript? Use
 [Medusa Mobile for React Native](https://github.com/bloomsynth/medusa-mobile-react-native),
 which also has a project generator (`npx create-medusa-mobile`).
 
@@ -119,7 +122,9 @@ How state flows:
 
 ### Customizing
 
-![Multiple themes](https://i.imgur.com/CfogW5z.png)
+| Default, dark | Vintage | Funky, dark | Eco |
+| :---: | :---: | :---: | :---: |
+| <img src="docs/screenshots/theme-default-dark.png" width="200" alt="Home screen in the default theme, dark mode" /> | <img src="docs/screenshots/theme-vintage.png" width="200" alt="Home screen in the vintage theme" /> | <img src="docs/screenshots/theme-funky-dark.png" width="200" alt="Home screen in the funky theme, dark mode" /> | <img src="docs/screenshots/theme-eco.png" width="200" alt="Home screen in the eco theme" /> |
 
 - **Themes:** edit or add a color set in `lib/theme/app_themes.dart`.
 - **Copy and languages:** edit the ARB files in `lib/l10n/arb/` and run
